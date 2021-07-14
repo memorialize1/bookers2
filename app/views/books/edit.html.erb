@@ -1,0 +1,17 @@
+<body>
+    
+    <div class = "custom">
+        
+        <%= form_with model: @user, local:true do |f| %>
+        <h4>Name</h4>
+        <%= f.text_field :name %>
+        <h4>Image</h4>
+        <%= f.attachment_field :Profile_image %>
+        <h4>Introduction</h4>
+        <%= f.text_area :introduction %>
+        
+    </div>
+    
+    
+    
+</body>
