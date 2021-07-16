@@ -11,29 +11,55 @@
 
   <body>
     <header>
-        <% if user_signed_in? %>
-      <li>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-      </li>
-      <li>
-        <%= link_to "Books", books_path %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Bookers", root_path %>
-      </li>
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-      <li>
+     
+      <% if user_signed_in? %>
+      <table class = "default">
+        <td class = "left">
+          <%= link_to "Bookers", root_path %>
+        </td>
+      
+        <td class = "right">
+          <%= link_to "Home", new_book_path %>
+        </td>
+      
+        <td class = "right">
+          <%= link_to "Users", users_path %>
+        </td>
+      
+        <td class = "right">
+          <%= link_to "Books", books_path %>
+        </td>
         
-      </li>
-      <li>
-        <%= link_to "Sign up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "Login", new_user_session_path %>
-      </li>
+        <td class = "right">
+          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        </td>
+      </table>
+     
+      <% else %>
+      
+      <table class = "default">
+        <td class = "left">
+          <%= link_to "Bookers", root_path %>
+        </td>
+      
+        <td class = "right">
+          <%= link_to "Home", root_path %>
+        </td>
+
+        <td class = "right">
+          <%= link_to "about", books_path %>
+        </td>
+      
+      
+        <td class = "right">
+          <%= link_to "Sign up", new_user_registration_path %>
+        </td>
+      
+        <td class = "right">
+          <%= link_to "Login", new_user_session_path %>
+        </td>
+      </table>
+      
     </header>
     <% end %>
     <%= yield %>

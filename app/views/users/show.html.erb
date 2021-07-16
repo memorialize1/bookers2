@@ -2,16 +2,15 @@
 
 
 
+<h1>ユーザー詳細</h1>
 
 
-<body>
-<%= flash[:success] %>
-<h1>Books my HOME</h1>
+
 
 <div class = "creater-box">
    <h3>User info</h3>
     <div class = "user-box">
-       < %= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg' %>
+       <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg' %>
        
        <div class = "info">
            
@@ -39,6 +38,16 @@
         <%= f.text_area :body %>
         <%= f.submit '投稿' %>
         <% end %>
+        
+        <div class = "errors">
+            <% if @book.errors.any? %>
+                <%= @book.errors.count %>件のエラーが発生しました。
+                <%= @book.errors.full_messages.each do |message| %>
+                    <%= massage %>
+                <% end %>
+            <% end %>
+            
+        </div>
 </div>
 
 <div class = "index-box">
@@ -58,7 +67,7 @@
                 
                
                 <td>
-                    < %= attachment_image_tag book.user, :profile_image, fallback: 'no_image.jpg' %>
+                    <%= attachment_image_tag book.user, :profile_image, fallback: 'no_image.jpg' %>
                 </td>
                 <td>
                     <%=link_to book_path(book) do %>
@@ -79,7 +88,3 @@
     
     
 </div>
-
-
-
-</body>

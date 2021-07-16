@@ -3,12 +3,34 @@
 
 
 <body>
+    
+<%= flash[:success] %>
+    
 <h1>Books#index</h1>
 
-<div class = "user-box">
+<div class = "creater-box">
+   <h3>User info</h3>
+    <div class = "user-box">
+       <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg' %>
+       
+       <div class = "info">
+           
+           <table class = "name">
+               <td>Name</td>
+               <td> <%= @user.name %> </td>
+           </table>
+           
+           <table class = "introduction">
+               <td>introduction</td>
+               <td> <%= @user.introduction %> </td>
+           </table>
+           
+           <%= link_to "edit", edit_user_path(@user) %>
+       
+       
+    </div>
     
     <h3>New Book</h3>
-    
     <div class = "text-box">
         <%= form_with model:@book, local:true do |f| %>
         <p>title</p>
@@ -36,10 +58,12 @@
                 
                
                 <td>
-                    <%= attachment_image_tag book.user, :profile_image, fallback: 'sample-author1.jpg' %>
+                    <%= attachment_image_tag book.user, :profile_image, fallback: 'no_image.jpg' %>
                 </td>
                 <td>
+                    <%=link_to book_path(book) do %>
                     <%= book.title %>
+                    <% end %>
                 </td>
                 <td>
                     <%= book.body %>
@@ -47,6 +71,7 @@
             
             </tr>
             <% end %>
+            <%= paginate @books %>
             
         </tbody>
         

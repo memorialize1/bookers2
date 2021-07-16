@@ -1,0 +1,40 @@
+
+
+<body>
+
+
+<h1>User info</h1>
+
+<div class = "info-box">
+    <%= form_with model:@user, local:true do |f| %>
+    <div class = "name-box" >
+        <p>Name</p>
+        <%= f.text_field :name %>
+    </div>
+    
+    <div class = "image-box">
+        <p>Image</p>
+        
+        <div class = "file">
+            <%= f.attachment_field :profile_image %>
+            <!-- % if t.attachment_field -->
+        </div>
+        
+    </div>
+    
+    <div class = "comment-box">
+        <p>Introduction</p>
+        <%= f.text_area :introduction %>
+    </div>
+    
+    <div class = "up">
+        <%= f.submit 'Update User' %>
+    </div>
+    
+    <% end %>
+    
+</div>
+
+
+
+</body>
