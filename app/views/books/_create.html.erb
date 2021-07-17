@@ -1,0 +1,22 @@
+
+<h3>New Book</h3>
+    <div class = "text-box">
+        <%= form_with model: create, local:true do |f| %>
+        <p>title</p>
+        <%= f.text_field :title %>
+        <p>Opinion</p>
+        <%= f.text_area :body %>
+        <br>
+        <%= f.submit '投稿' %>
+        <% end %>
+    </div>
+        <div class = "errors">
+            <% if @create.errors.any? %>
+                <%= @create.errors.count %>件のエラーが発生しました。
+                <%= @create.errors.full_messages.each do |message| %>
+                    <%= message %>
+                <% end %>
+            <% end %>
+            
+        </div>
+

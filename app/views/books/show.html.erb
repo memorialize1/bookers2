@@ -5,6 +5,17 @@
     
 
 <%= flash[:success] %>
+
+<div class = "creater-box">
+   <div class = "user-box">
+       <%= render 'books/user', user: @user %>
+   </div>
+   <div class = "create-box">
+       <%= render 'books/create', create: @create %>
+   </div>
+</div>
+
+
 <div class = "show">
     <h1>Book Detail</h1>
     
@@ -25,11 +36,18 @@
             <td>
                 <%= @book.body %>
             </td>
+            <% if @book.user == current_user %>
             <td>
-                <% if @book.user == current_user %>
                 <%= link_to "Edit", edit_book_path(@book) %>
+            <td>
                 <%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: "【確認】本当に削除してもよろしいですか？" } %>
-                <% end %>
+            </td>
+            <% else %>
+            <td>
+            </td>
+            <td>
+            </td>
+            <% end %>
             </td>
         </tbody>
     </table>

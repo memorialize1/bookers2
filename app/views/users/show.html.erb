@@ -1,53 +1,19 @@
 
 
 
-
+<%= flash[:success] %>
 <h1>ユーザー詳細</h1>
 
 
 
 
 <div class = "creater-box">
-   <h3>User info</h3>
-    <div class = "user-box">
-       <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg' %>
-       
-       <div class = "info">
-           
-           <table class = "name">
-               <td>Name</td>
-               <td> <%= @user.name %> </td>
-           </table>
-           
-           <table class = "introduction">
-               <td>introduction</td>
-               <td> <%= @user.introduction %> </td>
-           </table>
-           
-           <%= link_to "edit", edit_user_path(@user) %>
-       
-       
-    </div>
-    
-    <h3>New Book</h3>
-    <div class = "text-box">
-        <%= form_with model:@book, local:true do |f| %>
-        <p>title</p>
-        <%= f.text_field :title %>
-        <p>Opinion</p>
-        <%= f.text_area :body %>
-        <%= f.submit '投稿' %>
-        <% end %>
-        
-        <div class = "errors">
-            <% if @book.errors.any? %>
-                <%= @book.errors.count %>件のエラーが発生しました。
-                <%= @book.errors.full_messages.each do |message| %>
-                    <%= massage %>
-                <% end %>
-            <% end %>
-            
-        </div>
+   <div class = "user-box">
+       <%= render 'books/user', user: @user %>
+   </div>
+   <div class = "create-box">
+       <%= render 'books/create', create: @create %>
+   </div>
 </div>
 
 <div class = "index-box">
@@ -58,11 +24,11 @@
             <th></th>
             <th>Title</th>
             <th>Opinion</th>
-            <th colspan="3"></th>
+            <th colspan="5"></th>
         </thead>
         
         <tbody>
-            <% @books.each do |book| %>
+          <% @books.each do |book| %>
             <tr>
                 
                
@@ -77,9 +43,21 @@
                 <td>
                     <%= book.body %>
                 </td>
-            
+                
+                <% if @user.id == current_user %>
+                <td>
+                    <%= link_to "Edit", edit_book_path(book) %>
+                <td>
+                    <%= link_to "Destroy", book_path(book), method: :delete, data: { confirm: "【確認】本当に削除してもよろしいですか？" } %>
+                </td>
+                <% else %>
+                <td>
+                </td>
+                <td>
+                </td>
+                <% end %>
             </tr>
-            <% end %>
+          <% end %>
             <%= paginate @books %>
             
         </tbody>

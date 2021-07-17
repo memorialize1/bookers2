@@ -1,22 +1,17 @@
 class BooksController < ApplicationController
-  def new
-    @user = User.find(current_user.id)
-    @null = Book.where(user_id: current_user.id)
-    @books = @null.page(params[:page]).reverse_order
-    @book = Book.new
-  end
+
+before_action :ensure_correct_user, only:[:edit, :update]
+before_action :create_book
 
   def index
     @books = Book.page(params[:page]).reverse_order
-    @book = Book.new
-    @user = User.find(current_user.id)
+    @user = current_user
   end
   
-  def porigon
-  end
 
   def show
     @book = Book.find(params[:id])
+    @user = @book.user
   end
   
   def edit
@@ -24,12 +19,15 @@ class BooksController < ApplicationController
   end
   
   def create
-    @book = Book.new(books_params)
-    @book.user_id = current_user.id #@current_user = :user_id
-    if @book.save
+    @create = Book.new(books_params)
+    @create.user_id = current_user.id #@current_user = :user_id
+    if @create.save
        flash[:success] = "You have create book successfully."
-       redirect_to book_path(@book.id)
+       redirect_to book_path(@create.id)
     else
+       @user = current_user
+       null = Book.where(user_id: params[:id])
+       @books = null.page(params[:page]).reverse_order
        render "/users/show"
     end
       
@@ -53,8 +51,22 @@ class BooksController < ApplicationController
   
   private
   
+  def create_book
+    @create = Book.new
+  end
   
   def books_params
       params.require(:book).permit(:title, :body, :user_id)
   end
+  
+  def ensure_correct_user
+    @book = Book.find(params[:id])
+      if current_user == @book.user
+        render :edit
+      else
+        redirect_to user_path(current_user)
+      end
+    
+  end
+  
 end

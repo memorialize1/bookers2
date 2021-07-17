@@ -2,7 +2,6 @@
 
 <body>
 
-
 <h1>User info</h1>
 
 <div class = "info-box">
@@ -17,7 +16,6 @@
         
         <div class = "file">
             <%= f.attachment_field :profile_image %>
-            <!-- % if t.attachment_field -->
         </div>
         
     </div>
@@ -35,6 +33,15 @@
     
 </div>
 
+<div class = "errors">
+    <% if @user.errors.any? %>
+        <%= @user.errors.count %>件のエラーが発生しました。
+        <%= @user.errors.full_messages.each do |message| %>
+            <%= mssage %>
+        <% end %>
+    <% end %>
+            
+        </div>
 
 
 </body>

@@ -8,36 +8,12 @@
 <h1>User Index</h1>
 
 <div class = "creater-box">
-   <h3>User info</h3>
-    <div class = "user-box">
-       < %= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg' %>
-       
-       <div class = "info">
-           
-           <table class = "name">
-               <td>Name</td>
-               <td> <%= @user.name %> </td>
-           </table>
-           
-           <table class = "introduction">
-               <td>introduction</td>
-               <td> <%= @user.introduction %> </td>
-           </table>
-           
-           <%= link_to "edit", edit_user_path(@user) %>
-       
-       
-    </div>
-    
-    <h3>New Book</h3>
-    <div class = "text-box">
-        <%= form_with model:@book, local:true do |f| %>
-        <p>title</p>
-        <%= f.text_field :title %>
-        <p>Opinion</p>
-        <%= f.text_area :body %>
-        <%= f.submit '投稿' %>
-        <% end %>
+   <div class = "user-box">
+       <%= render 'books/user', user: @user %>
+   </div>
+   <div class = "create-box">
+       <%= render 'books/create', create: @create %>
+   </div>
 </div>
 
 <div class = "index-box">
@@ -58,7 +34,7 @@
                 
                
                 <td>
-                    < %= attachment_image_tag user, :profile_image, fallback: 'no_image.jpg' %>
+                    <%= attachment_image_tag user, :profile_image, fallback: 'no_image.jpg' %>
                 </td>
                 <td>
                     <%= user.name %>

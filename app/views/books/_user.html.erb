@@ -1,0 +1,21 @@
+
+   <h3>User info</h3>
+   
+       <%= attachment_image_tag user, :profile_image, fallback: 'no_image.jpg' %>
+       
+       <div class = "info">
+           
+           <table class = "name">
+               <td>Name</td>
+               <td> <%= user.name %> </td>
+           </table>
+           
+           <table class = "introduction">
+               <td>introduction</td>
+               <td> <%= user.introduction %> </td>
+           </table>
+           <div class = "edit">
+                 <%= link_to "edit", edit_user_path(user) %>
+           </div>
+           
+           
