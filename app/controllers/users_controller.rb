@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         flash[:success] = "You have updated user successfully."
         redirect_to user_path(current_user)
      else
-        render "/user/edit"
+        render :edit
      end
   end
   
@@ -39,9 +39,8 @@ class UsersController < ApplicationController
        redirect_to book_path(@create.id)
     else
        @user = current_user
-       null = Book.where(user_id: params[:id])
-       @books = null.page(params[:page]).reverse_order
-       render "/users/show"
+       @books = Book.page(params[:page]).reverse_order
+       render "/books/index"
     end
   end
   
@@ -57,11 +56,8 @@ class UsersController < ApplicationController
   end
   
   def ensure_correct_user
-      @post = Book.find(params[:id])
-      if current_user.id == @post.id
-        @user = User.find(params[:id])
-        render :edit
-      else
+      @user = User.find(params[:id])
+      if current_user.id != @user.id
         redirect_to user_path(current_user)
       end
     

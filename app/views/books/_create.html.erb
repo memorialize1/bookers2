@@ -1,5 +1,5 @@
 
-<h3>New Book</h3>
+<h3>New book</h3>
     <div class = "text-box">
         <%= form_with model: create, local:true do |f| %>
         <p>title</p>
@@ -7,14 +7,16 @@
         <p>Opinion</p>
         <%= f.text_area :body %>
         <br>
-        <%= f.submit '投稿' %>
+        <%= f.submit 'Create Book' %>
         <% end %>
     </div>
         <div class = "errors">
             <% if @create.errors.any? %>
+            <div class="warning">
+                <h3>errors</h3>
                 <%= @create.errors.count %>件のエラーが発生しました。
                 <%= @create.errors.full_messages.each do |message| %>
-                    <%= message %>
+                    <li> <%= message %></li>
                 <% end %>
             <% end %>
             

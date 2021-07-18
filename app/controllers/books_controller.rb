@@ -26,9 +26,8 @@ before_action :create_book
        redirect_to book_path(@create.id)
     else
        @user = current_user
-       null = Book.where(user_id: params[:id])
-       @books = null.page(params[:page]).reverse_order
-       render "/users/show"
+       @books = Book.page(params[:page]).reverse_order
+       render "/books/index"
     end
       
   end
@@ -39,14 +38,14 @@ before_action :create_book
        flash[:success] = "You have updated book successfully."
        redirect_to book_path(@book.id)
      else
-       render "/books/edit"
+       render :edit
      end
   end
   
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-    redirect_to book_user_path(@book.user_id)
+    redirect_to books_path
   end
   
   private
@@ -61,9 +60,7 @@ before_action :create_book
   
   def ensure_correct_user
     @book = Book.find(params[:id])
-      if current_user == @book.user
-        render :edit
-      else
+      if current_user != @book.user
         redirect_to user_path(current_user)
       end
     

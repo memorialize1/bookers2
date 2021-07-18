@@ -18,19 +18,16 @@
 </div>
 
 
-<!--
 <fotter>
-  % if @book.errors.any? %>
+  <% if @book.errors.any? %>
   <div class="warning">
     <ul>
       <h3>errors</h3>
-      % @book.errors.full_messages.each do |message| %>
+      <% @book.errors.full_messages.each do |message| %>
         <li> %= message %></li>
-      % end %>
+      <% end %>
     </ul>
 </div>
- % end %>
-</fotter>
-                -->
-                
+ <% end %>
+</fotter>  
 </body>
