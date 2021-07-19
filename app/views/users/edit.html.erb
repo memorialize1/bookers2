@@ -1,47 +1,49 @@
 
 
 <body>
-
-<h1>User info</h1>
-
-<div class = "info-box">
-    <%= form_with model:@user, local:true do |f| %>
-    <div class = "name-box" >
-        <p>Name</p>
-        <%= f.text_field :name %>
-    </div>
-    
-    <div class = "image-box">
-        <p>Image</p>
-        
-        <div class = "file">
-            <%= f.attachment_field :profile_image %>
-        </div>
-        
-    </div>
-    
-    <div class = "comment-box">
-        <p>Introduction</p>
-        <%= f.text_area :introduction %>
-    </div>
-    
-    <div class = "up">
-        <%= f.submit 'Update User' %>
-    </div>
-    
-    <% end %>
-    
-</div>
-
-<div class = "errors">
-    <% if @user.errors.any? %>
-        <%= @user.errors.count %>件のエラーが発生しました。
-        <% @user.errors.full_messages.each do |message| %>
-            <%= message %>
-        <% end %>
-    <% end %>
+<div class = "container">
+    <div class = "row">
+        <div class = "col-xl-12">
+            <h1>User info</h1>
             
+            <div class = "info-box">
+                <%= form_with model:@user, local:true do |f| %>
+                <div class = "name-box" >
+                    <p>Name</p>
+                    <%= f.text_field :name %>
+                </div>
+                
+                <div class = "image-box">
+                    <p>Image</p>
+                    
+                    <div class = "file">
+                        <%= f.attachment_field :profile_image %>
+                    </div>
+                    
+                </div>
+                
+                <div class = "comment-box">
+                    <p>Introduction</p>
+                    <%= f.text_area :introduction %>
+                </div>
+                
+                <div class = "up">
+                    <%= f.submit 'Update User', class: "btn btn-success btn-sm update" %>
+                </div>
+                
+                <% end %>
+                
+            </div>
+            
+            <div class = "errors">
+                <% if @user.errors.any? %>
+                    <%= @user.errors.count %>件のエラーが発生しました。
+                    <% @user.errors.full_messages.each do |message| %>
+                        <%= message %>
+                    <% end %>
+                <% end %>
+            </div>
         </div>
-
-
+    </div>
+</div>
 </body>

@@ -4,7 +4,7 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/379e0d9739.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -13,53 +13,50 @@
     <header>
      
       <% if user_signed_in? %>
-      <table class = "default">
-        <td class = "left">
-          <%= link_to "Bookers", root_path %>
-        </td>
-      
-        <td class = "right">
-          <%= link_to "Home", user_path(current_user) %>
-        </td>
-      
-        <td class = "right">
-          <%= link_to "Users", users_path %>
-        </td>
-      
-        <td class = "right">
-          <%= link_to "Books", books_path %>
-        </td>
-        
-        <td class = "right">
-          <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-        </td>
-      </table>
+      <nav class = "navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          
+                  <%= link_to "Bookers", root_path, class: "navbar-brand" %>
+                  
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+
+                    <%= link_to "Home", user_path(current_user), class: "fas fa-home nav-link text-light" %>
+                    
+                    <%= link_to "Users", users_path, class: "fas fa-users nav-link text-light" %>
+
+                    <%= link_to "Books", books_path, class: "fas fa-book-open nav-link text-light" %>
+
+                    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "fas fa-sign-out-alt nav-link text-light" %>
+
+                </ul>
+              </div>
+        </div>
+      </nav>
      
       <% else %>
       
-      <table class = "default">
-        <td class = "left">
-          <%= link_to "Bookers", root_path %>
-        </td>
-      
-        <td class = "right">
-          <%= link_to "Home", root_path %>
-        </td>
+      <nav class = "navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          
+                  <%= link_to "Bookers", root_path, class: "navbar-brand" %>
 
-        <td class = "right">
-          <%= link_to "About", homes_about_path %>
-        </td>
-      
-      
-        <td class = "right">
-          <%= link_to "Sign up", new_user_registration_path %>
-        </td>
-      
-        <td class = "right">
-          <%= link_to "Login", new_user_session_path %>
-        </td>
-      </table>
-      
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+
+                    <%= link_to "Home", root_path, class: "fas fa-home nav-link text-light" %>
+
+                    <%= link_to "About", home_about_path, class: "fas fa-link nav-link text-light" %>
+                    
+                    <%= link_to "sign up", new_user_registration_path, class: "fas fa-user-plus nav-link text-light" %>
+
+                    <%= link_to "Login", new_user_session_path, class: "fas fa-sign-in-alt nav-link text-light" %>
+
+                </ul>
+              </div>
+
+        </div>
+      </nav>
     </header>
     <% end %>
     <%= yield %>
